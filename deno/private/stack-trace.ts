@@ -2,12 +2,12 @@
 export function captureStackTrace(below?: Function): string[] {
   below = below || captureStackTrace; // hide myself if nothing else
   const object = { stack: '' };
-  const previousLimit = Error.stackTraceLimit;
+  // const previousLimit = Error.stackTraceLimit;
   try {
-    Error.stackTraceLimit = Number.MAX_SAFE_INTEGER;
+    // Error.stackTraceLimit = Number.MAX_SAFE_INTEGER;
     Error.captureStackTrace(object, below);
   } finally {
-    Error.stackTraceLimit = previousLimit;
+    // Error.stackTraceLimit = previousLimit;
   }
   if (!object.stack) {
     return [];

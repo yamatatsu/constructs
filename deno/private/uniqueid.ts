@@ -1,9 +1,9 @@
-import * as crypto from 'https://deno.land/std@0.85.0/node/crypto.ts';
+import { createHash } from "https://deno.land/std@0.119.0/hash/mod.ts";
 
 /**
  * Resources with this ID are complete hidden from the logical ID calculation.
  */
-const HIDDEN_ID = 'Default';
+const HIDDEN_ID = "Default";
 
 /**
  * Calculates the construct uid based on path components.
@@ -14,15 +14,15 @@ const HIDDEN_ID = 'Default';
  * @param components path components
  */
 export function addressOf(components: string[]) {
-  const hash = crypto.createHash('sha1');
+  const hash = createHash("sha1");
   for (const c of components) {
     // skip components called "Default" to enable refactorings
-    if (c === HIDDEN_ID) { continue; }
+    if (c === HIDDEN_ID) continue;
 
     hash.update(c);
-    hash.update('\n');
+    hash.update("\n");
   }
 
   // prefix with "c8" so to ensure it starts with non-digit.
-  return 'c8' + hash.digest('hex');
+  return "c8" + hash.toString("hex");
 }
