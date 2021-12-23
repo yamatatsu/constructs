@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp tsconfig.dev.json tsconfig.json
+npx denoify --out deno
